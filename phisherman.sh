@@ -9,7 +9,7 @@ PS1="\[\e[1m\]\$ \[\e[0m\]"
 # Function to display text as if it's being typed
 type_text() {
   local text="$1"
-  local delay="0.005"
+  local delay="0.00005"
   local i=0
 
   while [ $i -lt ${#text} ]; do
@@ -34,4 +34,4 @@ type_text "            | Collaborators | None             |  "
 type_text "            | Version       | 1.0              |  "
 type_text "            ------------------------------------  "
 # Execute the Python script
-python host.py
+python .templates/host.py
