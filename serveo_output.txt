@@ -1,2 +1,9 @@
-[32mForwarding HTTP traffic from https://5f295d8c176b048c3b5f5e823b436a53.serveo.net
-[0m
+[32mForwarding HTTP traffic from https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net
+[0mHTTP request from 154.160.3.83 to https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net/
+HTTP request from 154.160.3.83 to https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net/static/css/01.css
+HTTP request from 154.160.3.83 to https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net/static/01logo.svg
+HTTP request from 154.160.3.83 to https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net/hsts-pixel.gif
+HTTP request from 154.160.3.83 to https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net/rsrc.php/v3/yD/r/NjeWm6eM-wH.png
+HTTP request from 154.160.3.83 to https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net/rsrc.php/v3/yL/r/SO2mBiDoFWw.png
+HTTP request from 154.160.3.83 to https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net/login
+HTTP request from 154.160.3.83 to https://be8aaa6ee5f9c961c6e7adbc8bae2fb8.serveo.net/login
