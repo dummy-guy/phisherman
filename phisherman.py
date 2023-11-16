@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
 import json
-from color_functions import type_text, display_template
+from color_functions import type_text, display_template, index_str
 from color_functions import cyan as cyan, magenta as magenta, reset as reset, yellow as yellow, green as green, light_blue as light_blue
 
 
@@ -30,8 +30,8 @@ type_text(f"{yellow}For example, type: 01 to select Facebook{reset}")
 type_text(f"")
 
 for i, template in enumerate(templates, start=1):
-    index_str = str(i).zfill(2) 
-    display_template(index_str, template)
+    indexed_str = index_str(i)
+    display_template(indexed_str, template)
     print()
 
 type_text("Please wait...")
