@@ -18,3 +18,6 @@ def type_text(text):
 def display_template(index, name):
     print(f"{yellow}[{reset}{index}{yellow}]{reset} {name}")
     
+def index_str(number):
+  indexed_str=str(number).zfill(2) 
+  return indexed_str
