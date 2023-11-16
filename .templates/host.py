@@ -11,7 +11,7 @@ import subprocess
 import json
 import logging
 from flask import Flask, render_template, request, redirect
-from color_functions import type_text, display_template
+from color_functions import type_text, display_template, index_str
 from color_functions import cyan as cyan, magenta as magenta, reset as reset, yellow as yellow, green as green, light_blue as light_blue
 
 def clear_screen():
@@ -110,10 +110,9 @@ if __name__ == '__main__':
     print(f"{light_blue}Select an option")
     print()
     public_url = input(f"{magenta}>>> {cyan}")
-    
+    indexed_link = index_str(public_url)
     clear_screen()
-
-    if public_url == "02":
+    if indexed_link == "02":
         print(f"{reset}{green}Starting Serveo Tunnel ...{reset}")
         print(f"{light_blue}Generating public link...")
         from expose import Serveo_Link
