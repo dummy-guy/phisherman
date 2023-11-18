@@ -21,3 +21,10 @@ def display_template(index, name):
 def index_str(number):
   indexed_str=str(number).zfill(2) 
   return indexed_str
+
+def check_installed(command):
+    try:
+        subprocess.check_output(command, stderr=subprocess.STDOUT)
+        return True
+    except subprocess.CalledProcessError:
+        return False
