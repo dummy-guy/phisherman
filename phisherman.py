@@ -1,15 +1,8 @@
 #!/usr/bin/env python3
 import subprocess
 import json
-from color_functions import type_text, display_template, index_str
+from color_functions import type_text, display_template, index_str, check_installed
 from color_functions import cyan as cyan, magenta as magenta, reset as reset, yellow as yellow, green as green, light_blue as light_blue
-
-def check_installed(command):
-    try:
-        subprocess.check_output(command, stderr=subprocess.STDOUT)
-        return True
-    except subprocess.CalledProcessError:
-        return False
 
 # Clear the screen
 subprocess.run(['clear'])
@@ -47,9 +40,9 @@ for i, template in enumerate(templates, start=1):
 not_installed_requirements = [pkg for pkg in requirements if not check_installed(['dpkg', '-s', pkg])]
 if not_installed_requirements:
     type_text("Installing Linux packages...")
-    subprocess.run(['sudo', 'apt-get', 'install'] + not_installed_requirements)
+    subprocess.run(['apt', 'install'] + not_installed_requirements)
 else:
-    type_text("Linux packages are already installed.")
+    type_text(f"{green}Linux packages are already installed.{reset}")
 
 # Check if Python dependencies are installed
 not_installed_dependencies = [dep for dep in python_dependencies if not check_installed(['pip3', 'show', dep])]
@@ -57,7 +50,7 @@ if not_installed_dependencies:
     type_text("Installing Python dependencies...")
     subprocess.run(['pip3', 'install'] + not_installed_dependencies)
 else:
-    type_text("Python dependencies are already installed.")
+    type_text(f"{green}Python dependencies are already installed.{reset}")
 
 type_text("Please wait...")
 
