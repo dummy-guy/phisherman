@@ -1,6 +1,6 @@
-# How To Use It PhisherMan
+# How To Use PhisherMan Phishing Tool
 
-## 1st Install it
+## 1st Install it by running these commands
 ```
 $ apt update && apt upgrade
 ```
@@ -9,6 +9,18 @@ $ apt install git
 ```
 ```
 $ git clone https://github.com/dummy-guy/phisherman
+```
+
+## Then run these commands too
+### #No need for installation again if already done
+```
+$ cd phisherman
+```
+```
+$ chmod +x *
+```
+```
+$ bash start.sh
 ```
 
 # Description
