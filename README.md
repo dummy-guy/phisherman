@@ -1,4 +1,15 @@
-# PhisherMan
+# How To Use It PhisherMan
+
+## 1st Install it
+```
+$ apt update && apt upgrade
+```
+```
+$ apt install git
+```
+```
+$ git clone https://github.com/dummy-guy/phisherman
+```
 
 # Description
 ...
