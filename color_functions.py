@@ -1,4 +1,4 @@
-import time
+import time, subprocess
 
 # ANSI color escape codes
 cyan = '\033[0;36m'
